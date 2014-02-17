@@ -34,7 +34,7 @@ class TodosController < ApplicationController
     @todo = Todo.find(params[:id])
 
     if @todo.update(todo_params)
-      head :no_content
+      render json: @todo
     else
       render json: @todo.errors, status: :unprocessable_entity
     end
