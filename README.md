@@ -24,3 +24,13 @@ A todo list management web application.
  
  - As complementary to the last item, one should be able to create users in the system via an interface,
    probably a signup/register screen.
+
+## Implementation
+
+This project was implemented using two layers: a pure API layer, and a UI layer.
+
+The API layer provides a programmable interface to manipulate a user's todo list.
+
+The UI layer consumes the API and provides a graphical interface for the todo list.
+
+For further information, please consult each layer's README.
