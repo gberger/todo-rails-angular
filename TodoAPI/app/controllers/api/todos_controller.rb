@@ -1,5 +1,5 @@
 module Api
-  class TodosController < ApplicationController
+  class TodosController < ApiController
     # GET /todos
     # GET /todos.json
     def index
@@ -49,6 +49,8 @@ module Api
 
       head :no_content
     end
+
+    private
 
     def todo_params
       params.require(:todo).permit(:text, :priority, :completed, :due_date)
