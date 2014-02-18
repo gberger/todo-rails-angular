@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create }
 
   has_many :api_keys
+  has_many :todos
 
   def as_json(options)
     {email: email}
