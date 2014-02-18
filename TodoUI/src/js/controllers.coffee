@@ -1,7 +1,8 @@
 angular.module("todoApp")
 
 .controller "TodosCtrl", ($scope, Todo) ->
-	$scope.hello = "hi"
+	todos = Todo.query {}, ->
+		$scope.todos = todos
 
 .controller "TodoCtrl", ($scope, $routeParams, Todo) ->
 	$scope.hello = "world"
