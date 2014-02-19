@@ -1,7 +1,9 @@
 angular.module("todoApp")
 
-.factory "Todo", ($resource) ->
-	$resource "//localhost:3000/api/todos/:id", id: "@id"
+.value('API_ENDPOINT', '//localhost:3000/api')
+
+.factory "Todo", (API_ENDPOINT, $resource) ->
+	$resource "#{API_ENDPOINT}/todos/:id", id: "@id"
 
 .factory "User", () ->
 	isLogged: false,
