@@ -3,8 +3,6 @@
 
 <ul ng-repeat="todo in todos" class="todo-list">
     <li class="todo-item">
-        <a ng-href="#/todos/{{todo.id}}">
-            {{todo.text}}
-        </a>
+        {{todo.text}} - {{todo.completed}} - {{todo.priority}} - {{todo.due_date}}
     </li>
 </ul>

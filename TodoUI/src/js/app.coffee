@@ -14,10 +14,6 @@ angular.module("todoApp", ["ngRoute", "ngResource", "ngAnimate", "angular-growl"
 		templateUrl: "partials/todos.html"
 		controller: "TodosCtrl"
 
-	$routeProvider.when "/todos/:id",
-		templateUrl: "partials/todo.html"
-		controller: "TodoCtrl"
-
 	$routeProvider.otherwise redirectTo: "/todos"
 
 	$httpProvider.responseInterceptors.push(growlProvider.serverMessagesInterceptor);

@@ -6,6 +6,6 @@ angular.module("todoApp")
 	$resource "#{API_ENDPOINT}/todos/:id", {id: "@id"}, {update: {method: 'PATCH'}}
 
 .factory "User", () ->
-	isLoggedIn: false,
+	isLoggedIn: true,
 	email: ''
-	apiKey: ''
+	apiKey: '02a8a6fb424000639688968923b3ed4f'

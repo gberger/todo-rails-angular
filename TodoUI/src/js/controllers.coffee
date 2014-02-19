@@ -29,10 +29,3 @@ angular.module("todoApp")
 		todo.$save()
 		todos = Todo.query {}, ->
 			$scope.todos = todos
-
-.controller "TodoCtrl", ($scope, $routeParams, Todo, User) ->
-	$scope.hello = "world"
-	$scope.id = $routeParams.id
-	todo = Todo.get {id: $routeParams.id}, ->
-		$scope.todo = todo
-
