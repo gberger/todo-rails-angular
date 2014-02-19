@@ -72,3 +72,8 @@ Response:
     }
 }
 ```
+
+### DELETE /api/sessions
+
+You can expire an API Key with this call.
+

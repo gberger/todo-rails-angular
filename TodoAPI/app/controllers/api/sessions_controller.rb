@@ -13,5 +13,12 @@ module Api
         render json: {messages: [{text: "Incorrect email or password", severity: "error"}]}, status: 400
       end
     end
+
+    # DELETE /sessions
+    # DELETE /sessions.json
+    def destroy
+      current_api_key.destroy
+      head :no_content
+    end
   end
 end
