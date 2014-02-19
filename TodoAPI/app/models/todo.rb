@@ -3,5 +3,7 @@ class Todo < ActiveRecord::Base
   validates :text, length: { minimum: 1, maximum: 4096 }
 
   belongs_to :user
+
+  scope :owned_by, lambda{|user| {conditions: {user_id: user.id}}}
   
 end
