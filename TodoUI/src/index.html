@@ -7,7 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="lib/css/bootstrap.css" rel="stylesheet">
+    <link href="lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/css/angular-growl.min.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
@@ -21,11 +22,14 @@
 
 <div class="container">
 
+    <div growl></div>
     <div ng-view></div>
 
 </div>
 
 <script src="lib/js/angular.min.js"></script>
+<script src="lib/js/angular-animate.min.js"></script>
+<script src="lib/js/angular-growl.min.js"></script>
 <script src="lib/js/angular-route.min.js"></script>
 <script src="lib/js/angular-ui-bootstrap.min.js"></script>
 <script src="lib/js/angular-resource.min.js"></script>
