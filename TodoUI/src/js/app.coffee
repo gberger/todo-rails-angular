@@ -19,5 +19,5 @@ angular.module("todoApp", ["ngRoute", "ngResource"])
 
 .factory 'TodoAPIInterceptor', ($q, $rootScope, User) ->
 		request: (config) ->
-			config.headers['AccessToken'] = User.apiKey
+			config.headers['AccessToken'] = User.apiKey if User.isLoggedIn
 			return config

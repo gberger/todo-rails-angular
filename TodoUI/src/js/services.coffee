@@ -6,6 +6,6 @@ angular.module("todoApp")
 	$resource "#{API_ENDPOINT}/todos/:id", id: "@id"
 
 .factory "User", () ->
-	isLogged: false,
+	isLoggedIn: true,
 	email: ''
 	apiKey: '705b3860432d1a1147004ad22d711680'
