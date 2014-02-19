@@ -26,7 +26,6 @@ angular.module("todoApp", ["ngRoute", "ngResource"])
 			return config
 
 		responseError: (rejection) ->
-			console.log('error')
 			switch rejection.status
 				when 401
 					$location.path '/login'

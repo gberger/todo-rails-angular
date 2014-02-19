@@ -8,4 +8,4 @@ angular.module("todoApp")
 .factory "User", () ->
 	isLoggedIn: true,
 	email: ''
-	apiKey: '705b3860432d1a1147004ad22d711680'
+	apiKey: ''

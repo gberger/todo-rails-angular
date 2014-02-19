@@ -10,13 +10,13 @@ angular.module("todoApp")
 			User.isLoggedIn = true
 			User.email = data.user.email
 			User.apiKey = data.api_key.access_token
-			$location('/home')
+			$location.path('/home')
 
 	$scope.login = ->
-		loginOrSignup('/users')
+		loginOrSignup('/sessions')
 
 	$scope.signup = ->
-		loginOrSignup('/sessions')
+		loginOrSignup('/users')
 
 
 .controller "TodosCtrl", ($scope, Todo, User) ->
