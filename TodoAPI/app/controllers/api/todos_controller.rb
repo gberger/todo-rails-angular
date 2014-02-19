@@ -25,7 +25,7 @@ module Api
       if @todo.save
         render json: @todo, status: :created, location: @todo
       else
-        render json: @todo.errors, status: :unprocessable_entity
+        render json: {messages: @todo.errors.angular_growl_messages}, status: :bad_request
       end
     end
 
@@ -37,7 +37,7 @@ module Api
       if @todo.update(todo_params)
         render json: @todo
       else
-        render json: @todo.errors, status: :unprocessable_entity
+        render json: {messages: @todo.errors.angular_growl_messages}, status: :bad_request
       end
     end
 

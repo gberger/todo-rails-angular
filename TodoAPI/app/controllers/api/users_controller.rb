@@ -10,7 +10,7 @@ module Api
         key = ApiKey.create(user_id: user.id)
         render json: {api_key: key, user: user}, status: :created
       else
-        render json: user.errors, status: :unprocessable_entity
+        render json: {messages: user.errors.angular_growl_messages}, status: :bad_request
       end
     end
 
