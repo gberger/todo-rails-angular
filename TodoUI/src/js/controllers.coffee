@@ -23,6 +23,13 @@ angular.module("todoApp")
 	todos = Todo.query {}, ->
 		$scope.todos = todos
 
+	$scope.newTodo = ->
+		todo = new Todo()
+		todo.text = $scope.newTodoText
+		todo.$save()
+		todos = Todo.query {}, ->
+			$scope.todos = todos
+
 .controller "TodoCtrl", ($scope, $routeParams, Todo, User) ->
 	$scope.hello = "world"
 	$scope.id = $routeParams.id
