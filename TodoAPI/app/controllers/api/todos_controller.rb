@@ -21,9 +21,10 @@ module Api
     def create
       puts params.inspect
       @todo = Todo.new(todo_params)
+      @todo.user = current_user
 
       if @todo.save
-        render json: @todo, status: :created, location: @todo
+        render json: @todo, status: :created
       else
         render json: {messages: @todo.errors.angular_growl_messages}, status: :bad_request
       end
@@ -32,7 +33,7 @@ module Api
     # PATCH/PUT /todos/1
     # PATCH/PUT /todos/1.json
     def update
-      @todo = Todo.find(params[:id])
+      @todo = Todo.owned_by(current_user).find(params[:id])
 
       if @todo.update(todo_params)
         render json: @todo
@@ -44,7 +45,7 @@ module Api
     # DELETE /todos/1
     # DELETE /todos/1.json
     def destroy
-      @todo = Todo.find(params[:id])
+      @todo = Todo.owned_by(current_user).find(params[:id])
       @todo.destroy
 
       head :no_content
@@ -53,7 +54,7 @@ module Api
     private
 
     def todo_params
-      params.require(:todo).permit(:text, :priority, :completed, :due_date)
+      params.permit(:text, :priority, :completed, :due_date)
     end
   end
 end
