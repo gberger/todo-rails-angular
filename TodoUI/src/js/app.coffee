@@ -20,6 +20,7 @@ angular.module("todoApp", ["ngRoute", "ngResource", "ngAnimate", "angular-growl"
 
 	$routeProvider.otherwise redirectTo: "/todos"
 
+	$httpProvider.responseInterceptors.push(growlProvider.serverMessagesInterceptor);
 	growlProvider.globalTimeToLive(5000)
 
 .factory 'TodoAPIInterceptor', ($q, $rootScope, $location, User, growl) ->
