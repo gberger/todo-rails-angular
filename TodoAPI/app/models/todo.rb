@@ -4,6 +4,6 @@ class Todo < ActiveRecord::Base
 
   belongs_to :user
 
-  scope :owned_by, lambda{|user| {conditions: {user_id: user.id}}}
+  scope :owned_by, lambda{|user| where(user_id: user.id) }
   
 end
