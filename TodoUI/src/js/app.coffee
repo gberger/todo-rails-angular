@@ -1,4 +1,4 @@
-angular.module("todoApp", ["ngRoute", "ngResource", "ngAnimate", "angular-growl"])
+angular.module("todoApp", ["ngRoute", "ngResource", "ngAnimate", "angular-growl", "ui.bootstrap"])
 
 .config ($routeProvider, $httpProvider, growlProvider) ->
 	$httpProvider.interceptors.push 'TodoAPIInterceptor'
