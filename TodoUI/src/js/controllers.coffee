@@ -19,13 +19,24 @@ angular.module("todoApp")
 		loginOrSignup('/users')
 
 
-.controller "TodosCtrl", ($scope, Todo, User) ->
-	todos = Todo.query {}, ->
-		$scope.todos = todos
+.controller "TodosCtrl", ($scope, $location, Todo) ->
+	$scope.fetchTodos = ->
+		todos = Todo.query {order: $location.search()['order']}, ->
+			$scope.todos = todos
+	$scope.fetchTodos()
+
+	$scope.updateTodo = (todo) ->
+		todo.$update().then ->
+			console.log 'updated'
+			$scope.fetchTodos()
 
 	$scope.newTodo = ->
 		todo = new Todo()
 		todo.text = $scope.newTodoText
-		todo.$save()
-		todos = Todo.query {}, ->
-			$scope.todos = todos
+		todo.$save ->
+			scope.fetchTodos()
+
+	$scope.confirmDelete = (todo) ->
+		if confirm('Are you sure you want to delete this todo?')
+			todo.$delete ->
+				$scope.fetchTodos()

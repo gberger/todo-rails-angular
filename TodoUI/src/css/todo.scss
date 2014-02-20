@@ -1,0 +1,16 @@
+.todo-heading {
+  position: relative;
+}
+
+.todo-completed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0;
+  height: 100%;
+  width: 40px;
+}
+
+.todo-text {
+  margin-left: 45px;
+}

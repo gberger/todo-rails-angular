@@ -1,8 +1,58 @@
-<input type="text" ng-model="newTodoText"/>
-<a class="btn btn-success" ng-click="newTodo()">new</a>
+<div class="container">
+    <form ng-submit="newTodo()">
+        <input type="text" ng-model="newTodoText" class="form-control input-lg" placeholder="What do you need to do?"/>
+    </form>
 
-<ul ng-repeat="todo in todos" class="todo-list">
-    <li class="todo-item">
-        {{todo.text}} - {{todo.completed}} - {{todo.priority}} - {{todo.due_date}}
-    </li>
-</ul>
+    <br/>
+
+    <div ng-repeat="todo in todos" class="row">
+        <div class="col-md-12 todo-item">
+            <div class="panel panel-default">
+                <div class="panel-heading todo-heading">
+                    <button type="button" class="todo-completed btn btn-sm"
+                            ng-class="{'btn-success': todo.completed, 'btn-default': !todo.completed}"
+                            ng-model="todo.completed"
+                            ng-change="updateTodo(todo)"
+                            btn-checkbox>
+                        <i class="glyphicon glyphicon-check" ng-if="todo.completed"></i>
+                        <i class="glyphicon glyphicon-unchecked" ng-if="!todo.completed"></i>
+                    </button>
+                    <div class="todo-text">
+                        {{todo.text}}
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary" ng-model="todo.priority" btn-radio="1" ng-change="updateTodo(todo)">Highest</button>
+                                <button type="button" class="btn btn-primary" ng-model="todo.priority" btn-radio="2" ng-change="updateTodo(todo)">High</button>
+                                <button type="button" class="btn btn-primary" ng-model="todo.priority" btn-radio="3" ng-change="updateTodo(todo)">Normal</button>
+                                <button type="button" class="btn btn-primary" ng-model="todo.priority" btn-radio="4" ng-change="updateTodo(todo)">Low</button>
+                                <button type="button" class="btn btn-primary" ng-model="todo.priority" btn-radio="5" ng-change="updateTodo(todo)">Lowest</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="input-group">
+                                <input type="text" class="form-control"
+                                       datepicker-popup="dd-MMMM-yyyy"
+                                       ng-model="todo.due_date"
+                                       is-open="opened"
+                                       ng-change="updateTodo(todo)" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="col-md-4 todo-delete text-danger">
+                            <button class="btn btn-danger" ng-click="confirmDelete(todo)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
