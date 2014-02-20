@@ -27,8 +27,12 @@ angular.module("todoApp")
 
 	$scope.updateTodo = (todo) ->
 		todo.$update().then ->
-			console.log 'updated'
 			$scope.fetchTodos()
+
+	$scope.openDatepicker = ($event, todo) ->
+		$event.preventDefault()
+		$event.stopPropagation()
+		todo.datepickerOpened = true
 
 	$scope.newTodo = ->
 		todo = new Todo()

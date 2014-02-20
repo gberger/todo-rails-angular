@@ -37,17 +37,20 @@
                                 <input type="text" class="form-control"
                                        datepicker-popup="dd-MMMM-yyyy"
                                        ng-model="todo.due_date"
-                                       is-open="opened"
+                                       show-weeks="false"
+                                       is-open="todo.datepickerOpened"
                                        ng-change="updateTodo(todo)" />
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    <button class="btn btn-default" ng-click="openDatepicker($event, todo)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
                             </p>
                         </div>
-                        <div class="col-md-4 todo-delete text-danger">
-                            <button class="btn btn-danger" ng-click="confirmDelete(todo)">
-                                <i class="glyphicon glyphicon-trash"></i>
-                            </button>
+                        <div class="col-md-4">
+                            <div class="todo-delete pull-right">
+                                <button class="btn btn-danger" ng-click="confirmDelete(todo)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
