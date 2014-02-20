@@ -1,4 +1,4 @@
-angular.module("todoApp", ["ngRoute", "ngResource", "ngAnimate", "angular-growl", "ui.bootstrap"])
+angular.module("todoApp", ["ngRoute", "ngResource", "ngAnimate", "angular-growl", "ui.bootstrap", "xeditable"])
 
 .config ($routeProvider, $httpProvider, growlProvider) ->
 	$httpProvider.interceptors.push 'TodoAPIInterceptor'
@@ -31,3 +31,8 @@ angular.module("todoApp", ["ngRoute", "ngResource", "ngAnimate", "angular-growl"
 					$location.path '/login'
 
 			$q.reject rejection
+
+.run (editableThemes, editableOptions) ->
+	editableOptions.theme = 'bs3'
+	editableThemes.bs3.inputClass = 'input-block'
+	editableThemes.bs3.formTpl = '<form class="editable-wrap" role="form"></form>'

@@ -6,7 +6,7 @@ A todo list management web application.
 
  - [✓] I can have my todo list displayed.
 
- - I can manipulate my list (add/remove/modify entries).
+ - [✓] I can manipulate my list (add/remove/modify entries).
 
  - [✓] Assign priorities and due dates to the entries.
 

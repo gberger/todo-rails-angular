@@ -18,7 +18,11 @@
                         <i class="glyphicon glyphicon-unchecked" ng-if="!todo.completed"></i>
                     </button>
                     <div class="todo-text">
-                        {{todo.text}}
+                        <span editable-text="todo.text"
+                              onaftersave="updateTodo(todo)"
+                              buttons="no" >
+                            {{todo.text}}
+                        </span>
                     </div>
                 </div>
                 <div class="panel-body">

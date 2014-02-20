@@ -13,4 +13,10 @@
 
 .todo-text {
   margin-left: 45px;
+
+  .editable-wrap {
+    margin-bottom: -7px;
+    margin-top: -7px;
+    display: block;
+  }
 }
