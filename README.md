@@ -10,7 +10,7 @@ A todo list management web application.
 
  - [✓] Assign priorities and due dates to the entries.
 
- - I can sort my entry lists using due date and priority.
+ - [✓] I can sort my entry lists using due date and priority.
 
  - [✓] I can mark an entry as completed.
 

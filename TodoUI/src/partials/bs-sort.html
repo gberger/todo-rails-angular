@@ -1,0 +1,9 @@
+<span ng-repeat="attr in attributes">
+    <button type="button"
+            class="btn btn-primary"
+            ng-class="{'active': attr.direction}"
+            ng-click="click(attr)">
+        {{attr.displayName}}
+        <i class="glyphicon" ng-class="{'glyphicon-chevron-up': attr.direction == 'asc', 'glyphicon-chevron-down': attr.direction == 'desc'}"></i>
+    </button>
+</span>

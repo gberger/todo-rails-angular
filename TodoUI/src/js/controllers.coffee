@@ -20,6 +20,14 @@ angular.module("todoApp")
 
 
 .controller "TodosCtrl", ($scope, $location, Todo) ->
+	$scope.sortAttrs = [
+		displayName: 'Priority'
+		varName: 'priority'
+	,
+		displayName: 'Due Date'
+		varName: 'due_date'
+	]
+
 	$scope.fetchTodos = ->
 		todos = Todo.query {order: $location.search()['order']}, ->
 			for todo in todos when todo.due_date
