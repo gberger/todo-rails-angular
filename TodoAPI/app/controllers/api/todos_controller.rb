@@ -3,7 +3,7 @@ module Api
     # GET /todos
     # GET /todos.json
     def index
-      @todos = Todo.owned_by(current_user)
+      @todos = Todo.owned_by(current_user).order(order_param)
 
       render json: @todos
     end
@@ -55,6 +55,10 @@ module Api
 
     def todo_params
       params.permit(:text, :priority, :completed, :due_date)
+    end
+
+    def order_param
+      params[:order] or 'priority asc'
     end
   end
 end
