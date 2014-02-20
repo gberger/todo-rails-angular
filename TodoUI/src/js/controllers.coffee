@@ -55,3 +55,6 @@ angular.module("todoApp")
 		if confirm('Are you sure you want to delete this todo?')
 			todo.$delete ->
 				$scope.fetchTodos()
+
+	$scope.isLate = (todo) ->
+		!todo.completed && todo.due_date && todo.due_date < new Date()
