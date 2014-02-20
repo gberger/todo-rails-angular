@@ -26,7 +26,8 @@
                     <div class="todo-text">
                         <span editable-text="todo.text"
                               onaftersave="updateTodo(todo)"
-                              buttons="no" >
+                              buttons="no"
+                              ng-class="{'completed': todo.completed}">
                             {{todo.text}}
                         </span>
                     </div>
