@@ -22,6 +22,9 @@ angular.module("todoApp")
 .controller "TodosCtrl", ($scope, $location, Todo) ->
 	$scope.fetchTodos = ->
 		todos = Todo.query {order: $location.search()['order']}, ->
+			for todo in todos when todo.due_date
+				[year, month, day] = todo.due_date.split('-')
+				todo.due_date = new Date(year, month-1, day)
 			$scope.todos = todos
 	$scope.fetchTodos()
 
