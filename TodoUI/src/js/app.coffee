@@ -21,7 +21,7 @@ angular.module("todoApp", ["ngRoute", "ngResource", "ngAnimate", "angular-growl"
 
 .factory 'TodoAPIInterceptor', ($q, $rootScope, $location, User, growl) ->
 		request: (config) ->
-			config.headers['AccessToken'] = User.apiKey if User.isLoggedIn
+			config.headers['ApiKey'] = User.apiKey if User.isLoggedIn
 			return config
 
 		responseError: (rejection) ->
