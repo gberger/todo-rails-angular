@@ -3,10 +3,37 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 8 }
   validates :email, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create }
 
-  has_many :api_keys
   has_many :todos
 
   def as_json(options)
-    {email: email}
+    {email: email, api_key: api_key, api_key_expires_at: api_key_expires_at}
   end
+
+  def api_key_expired?
+    Time.new > api_key_expires_at
+  end
+
+  def reset_api_key
+    generate_api_key
+    update
+  end
+
+  private
+
+  before_create :generate_api_key
+  def generate_api_key
+    begin
+      self.api_key = SecureRandom.hex
+    end while self.class.exists?(api_key: api_key)
+    self.api_key_expires_at = 30.days.from_now
+  end
+
+  after_find :renew_api_key
+  def renew_api_key
+    if api_key_expired?
+      generate_api_key
+      update
+    end
+  end
+
 end

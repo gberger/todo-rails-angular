@@ -15,11 +15,13 @@
 
 To view and manipulate todos, you need to use a API key that will be given to you by the server once you signup or login.
 
-An API key has an access token and an expiration date. You cannot use an expired API key.
+Each user has a unique API key. If the user desires, they can reset it, generating a new one.
 
-In order to use an API key, you must include the token either in the **"access_token"** attribute in the request data, or in the **AccessToken** HTTP header.
+You cannot use an expired API key. Once it's expired, a new one will be generated. Use the login call to obtain it.
 
-### POST /api/users
+In order to use an API key, you must include the token either in the **"api_key"** attribute in the request data, or in the **ApiKey** HTTP header.
+
+### POST /api/users/signup
 
 Creates a new user. The email must be unique. Remember your password, you'll need it later to login.
 
@@ -36,19 +38,15 @@ Response:
 
 ```json
 {
-    "api_key": {
-        "access_token": "9ccc9365c72818f858d3cb243d8414aa",
-        "expires_at": "2014-03-21T04:43:57.398Z"
-    },
-    "user": {
-        "email": "name@example.com"
-    }
+    "api_key": "9ccc9365c72818f858d3cb243d8414aa",
+    "api_key_expires_at": "2014-03-21T04:43:57.398Z"
+    "email": "name@example.com"
 }
 ```
 
-### POST /api/sessions
+### POST /api/users/login
 
-You can generate new API Keys by "logging in".
+You can get your API key by "logging in".
 
 Request data:
 
@@ -63,17 +61,52 @@ Response:
 
 ```json
 {
-    "api_key": {
-        "access_token": "a6890498690ce41ccbf78c81b7dda568",
-        "expires_at": "2014-03-21T04:51:17.384Z"
-    },
-    "user": {
-        "email": "name@example.com"
-    }
+    "api_key": "9ccc9365c72818f858d3cb243d8414aa",
+    "api_key_expires_at": "2014-03-21T04:43:57.398Z"
+    "email": "name@example.com"
 }
 ```
 
-### DELETE /api/sessions
+### PUT /api/users/reset_api_key
 
-You can expire an API Key with this call.
+You can reset you API key. This invalidates the old one, and generates a new one.
 
+
+```json
+{
+    "email": "name@example.com",
+    "password": "pass1234"
+}
+```
+
+Response:
+
+```json
+{
+    "api_key": "8f15b8b676839c4d293071ae449fa496",
+    "api_key_expires_at": "2014-03-21T05:58:12.234Z"
+    "email": "name@example.com"
+}
+```
+
+### PUT /api/users/change_password
+
+You can change your password.
+
+```json
+{
+    "email": "name@example.com",
+    "old_password": "pass1234",
+    "new_password": "abcd5678"
+}
+```
+
+Response:
+
+```json
+{
+    "api_key": "8f15b8b676839c4d293071ae449fa496",
+    "api_key_expires_at": "2014-03-21T05:58:12.234Z"
+    "email": "name@example.com"
+}
+```

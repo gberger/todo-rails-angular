@@ -11,18 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218111305) do
+ActiveRecord::Schema.define(version: 20140222213317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "api_keys", force: true do |t|
-    t.string   "access_token"
-    t.string   "user_id"
-    t.datetime "expires_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "todos", force: true do |t|
     t.text     "text",                       null: false
@@ -39,6 +31,8 @@ ActiveRecord::Schema.define(version: 20140218111305) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "api_key"
+    t.datetime "api_key_expires_at"
   end
 
 end
