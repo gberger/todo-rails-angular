@@ -1,15 +1,12 @@
-<div class="container">
-    <form ng-submit="newTodo()">
+<main class="container">
+
+    <div ng-include="'partials/user.html'" class="todo-user-menu"></div>
+
+    <form ng-submit="newTodo()" class="todo-new">
         <input type="text" ng-model="newTodoText" class="form-control input-lg" placeholder="What do you need to do?"/>
     </form>
 
-    <br/>
-
-    <div class="pull-right" bs-sort attributes="sortAttrs"></div>
-
-    <br/>
-    <br/>
-    <br/>
+    <div class="pull-right todo-sort" bs-sort attributes="sortAttrs"></div>
 
     <div ng-repeat="todo in todos" class="row">
         <div class="col-md-12 todo-item">
@@ -70,4 +67,4 @@
         </div>
     </div>
 
-</div>
+</main>

@@ -1,5 +1,8 @@
 angular.module("todoApp")
 
+.controller "UserCtrl", ($scope, User) ->
+	$scope.user = User
+
 .controller "LoginCtrl", ($scope, $http, $location, User, API_ENDPOINT) ->
 	loginOrSignup = (loc) ->
 		$http
