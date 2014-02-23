@@ -28,6 +28,9 @@ angular.module("todoApp", ["ngRoute", "ngResource", "ngAnimate", "angular-growl"
 			switch rejection.status
 				when 401
 					growl.addWarnMessage('Please login.')
+					User.isLoggedIn = false
+					User.email = ''
+					User.apiKey = ''
 					$location.path '/login'
 
 			$q.reject rejection
