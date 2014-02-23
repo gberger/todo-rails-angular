@@ -21,7 +21,7 @@ You cannot use an expired API key. Once it's expired, a new one will be generate
 
 In order to use an API key, you must include the token either in the **"api_key"** attribute in the request data, or in the **ApiKey** HTTP header.
 
-### POST /api/users/signup
+### POST `/api/users/signup`
 
 Creates a new user. The email must be unique. Remember your password, you'll need it later to login.
 
@@ -44,7 +44,7 @@ Response:
 }
 ```
 
-### POST /api/users/login
+### POST `/api/users/login`
 
 You can get your API key by "logging in".
 
@@ -67,7 +67,7 @@ Response:
 }
 ```
 
-### PUT /api/users/reset_api_key
+### PUT `/api/users/reset_api_key`
 
 You can reset you API key. This invalidates the old one, and generates a new one.
 
@@ -89,7 +89,7 @@ Response:
 }
 ```
 
-### PUT /api/users/change_password
+### PUT `/api/users/change_password`
 
 You can change your password.
 
