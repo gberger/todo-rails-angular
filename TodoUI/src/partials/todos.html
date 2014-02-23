@@ -50,7 +50,8 @@
                                        ng-model="todo.due_date"
                                        show-weeks="false"
                                        is-open="todo.datepickerOpened"
-                                       ng-change="updateTodo(todo)" />
+                                       ng-change="updateTodo(todo)"
+                                       placeholder="Due date" />
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" ng-click="openDatepicker($event, todo)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
