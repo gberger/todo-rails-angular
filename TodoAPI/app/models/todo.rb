@@ -5,5 +5,9 @@ class Todo < ActiveRecord::Base
   belongs_to :user
 
   scope :owned_by, lambda{|user| where(user_id: user.id) }
-  
+
+  def as_json(options)
+    permit(:id, :completed, :text, :due_date, :priority, :created_at, :updated_at)
+  end
+
 end
