@@ -7,3 +7,8 @@ body {
   padding-bottom: 40px;
   background-color: #eee;
 }
+
+.growl {
+  // Above modal overlay.
+  z-index: 1100;
+}

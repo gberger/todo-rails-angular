@@ -60,7 +60,7 @@ angular.module("todoApp")
 		$location.path('/login')
 
 	User.changePassword = (oldPassword, newPassword) ->
-		$http(method: 'PUT', url: "#{API_ENDPOINT}/users/reset_api_key", data: {email: @email, old_password: oldPassword, new_password: newPassword})
+		$http(method: 'PUT', url: "#{API_ENDPOINT}/users/change_password", data: {email: @email, old_password: oldPassword, new_password: newPassword})
 
 	User.resetApiKey = (password) ->
 		$http(method: 'PUT', url: "#{API_ENDPOINT}/users/reset_api_key", data: {email: @email, password: password})

@@ -1,23 +1,54 @@
 angular.module("todoApp")
 
-.controller "UserCtrl", ($scope, User) ->
+.controller "UserCtrl", ($scope, $modal, User) ->
 	$scope.user = User
 
 	$scope.logout = ->
 		$scope.user.logout()
 
+	$scope.openApiKeyModal = ->
+		$modal.open
+			templateUrl: 'partials/user-api-key.html'
+			controller: 'UserApiKeyCtrl'
+
+	$scope.openChangePasswordModal = ->
+		$modal.open
+			templateUrl: 'partials/user-change-password.html'
+			controller: 'UserChangePasswordCtrl'
+
+
+.controller "UserApiKeyCtrl", ($scope, $modalInstance, $controller, User) ->
+	$scope.user = User
+	$scope.data = {}
+
+	$scope.close = ->
+		$modalInstance.dismiss('close')
+
+	$scope.resetApiKey = ->
+		User.resetApiKey($scope.data.password)
+
+
+.controller "UserChangePasswordCtrl", ($scope, $modalInstance, $controller, User) ->
+	$scope.user = User
+	$scope.data = {}
+
+	$scope.close = ->
+		$modalInstance.dismiss('close')
+
+	$scope.changePassword = ->
+		User.changePassword($scope.data.oldPassword, $scope.data.newPassword)
+
 
 .controller "LoginCtrl", ($scope, $http, $location, User) ->
-
-	callback = ->
+	loginOrSignupCallback = ->
 		User.toStorage()
 		$location.path('/home')
 
 	$scope.login = ->
-		User.login($scope.email, $scope.password).success callback
+		User.login($scope.email, $scope.password).success loginOrSignupCallback
 
 	$scope.signup = ->
-		User.signup($scope.email, $scope.password).success callback
+		User.signup($scope.email, $scope.password).success loginOrSignupCallback
 
 
 .controller "TodosCtrl", ($scope, $location, Todo) ->
