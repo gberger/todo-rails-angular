@@ -10,7 +10,7 @@
 
     <div ng-repeat="todo in todos" class="row">
         <div class="col-md-12 todo-item">
-            <div class="panel panel-default" ng-class="{'panel-danger': isLate(todo)}">
+            <div class="panel panel-default" ng-class="{'panel-danger': isLate(todo), 'panel-warning': isToday(todo)}">
                 <div class="panel-heading todo-heading">
                     <button type="button" class="todo-completed btn btn-sm"
                             ng-class="{'btn-success': todo.completed, 'btn-default': !todo.completed}"

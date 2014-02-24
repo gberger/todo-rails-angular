@@ -89,5 +89,17 @@ angular.module("todoApp")
 			todo.$delete ->
 				$scope.fetchTodos()
 
+	lpad = (value, length) ->
+		if (value.toString().length < length) then lpad('0' + value, length) else value
+
+	formatDate = (date) ->
+		return date+'' if typeof date == 'string'
+		"#{date.getFullYear()}-#{lpad(date.getMonth()+1, 2)}-#{lpad(date.getDate(), 2)}"
+
 	$scope.isLate = (todo) ->
-		!todo.completed && todo.due_date && todo.due_date < new Date()
+		r = !todo.completed && todo.due_date && formatDate(todo.due_date) < formatDate(new Date())
+		console.log todo, formatDate(todo.due_date), formatDate(new Date()), r
+		r
+
+	$scope.isToday = (todo) ->
+		!todo.completed && todo.due_date && formatDate(todo.due_date) == formatDate(new Date())
