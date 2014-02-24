@@ -40,8 +40,10 @@ angular.module("todoApp")
 
 
 .controller "LoginCtrl", ($scope, $http, $location, User) ->
+	$scope.rememberMe = true
+
 	loginOrSignupCallback = ->
-		User.toStorage()
+		User.toStorage() if $scope.rememberMe
 		$location.path('/home')
 
 	$scope.login = ->
