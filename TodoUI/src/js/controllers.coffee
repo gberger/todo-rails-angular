@@ -3,24 +3,21 @@ angular.module("todoApp")
 .controller "UserCtrl", ($scope, User) ->
 	$scope.user = User
 
-.controller "LoginCtrl", ($scope, $http, $location, User, API_ENDPOINT) ->
-	loginOrSignup = (loc) ->
-		$http
-			method: 'POST'
-			url: API_ENDPOINT + loc
-			data: email: $scope.email, password: $scope.password
-		.success (data, status, headers, config) ->
-			User.isLoggedIn = true
-			User.email = data.email
-			User.apiKey = data.api_key
-			User.apiKeyExpiresAt = data.api_key_expires_at
-			$location.path('/home')
+	$scope.logout = ->
+		$scope.user.logout()
+
+
+.controller "LoginCtrl", ($scope, $http, $location, User) ->
+
+	callback = ->
+		User.toStorage()
+		$location.path('/home')
 
 	$scope.login = ->
-		loginOrSignup('/users/login')
+		User.login($scope.email, $scope.password).success callback
 
 	$scope.signup = ->
-		loginOrSignup('/users/signup')
+		User.signup($scope.email, $scope.password).success callback
 
 
 .controller "TodosCtrl", ($scope, $location, Todo) ->
