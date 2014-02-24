@@ -97,9 +97,7 @@ angular.module("todoApp")
 		"#{date.getFullYear()}-#{lpad(date.getMonth()+1, 2)}-#{lpad(date.getDate(), 2)}"
 
 	$scope.isLate = (todo) ->
-		r = !todo.completed && todo.due_date && formatDate(todo.due_date) < formatDate(new Date())
-		console.log todo, formatDate(todo.due_date), formatDate(new Date()), r
-		r
+		!todo.completed && todo.due_date && formatDate(todo.due_date) < formatDate(new Date())
 
 	$scope.isToday = (todo) ->
 		!todo.completed && todo.due_date && formatDate(todo.due_date) == formatDate(new Date())
