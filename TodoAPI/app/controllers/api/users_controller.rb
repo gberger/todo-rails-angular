@@ -27,7 +27,7 @@ module Api
       user = User.find_by_email(params[:email])
       if user && user.authenticate(params[:password])
         user.reset_api_key
-        render json: user, status: :ok
+        render json: user.as_json(nil).merge(messages: [{text: 'API key reset successfully.', severity: 'info'}]), status: :ok
       else
         render json: {messages: [{text: "Incorrect email or password", severity: "error"}]}, status: 400
       end
@@ -38,7 +38,7 @@ module Api
       user = User.find_by_email(params[:email])
       if user && user.authenticate(params[:old_password])
         if user.update(password: params[:new_password])
-          render json: user, status: :ok
+          render json: user.as_json(nil).merge(messages: [{text: 'Password changed successfully.', severity: 'info'}]), status: :ok
         else
           render json: {messages: user.errors.angular_growl_messages}, status: :bad_request
         end
