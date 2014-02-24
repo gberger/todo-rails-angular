@@ -50,7 +50,7 @@ angular.module("todoApp")
 		todo = new Todo()
 		todo.text = $scope.newTodoText
 		todo.$save ->
-			scope.fetchTodos()
+			$scope.fetchTodos()
 
 	$scope.confirmDelete = (todo) ->
 		if confirm('Are you sure you want to delete this todo?')
