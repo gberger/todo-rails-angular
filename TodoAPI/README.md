@@ -39,7 +39,7 @@ Response:
 ```json
 {
     "api_key": "9ccc9365c72818f858d3cb243d8414aa",
-    "api_key_expires_at": "2014-03-21T04:43:57.398Z"
+    "api_key_expires_at": "2014-03-21T04:43:57.398Z",
     "email": "name@example.com"
 }
 ```
@@ -62,15 +62,16 @@ Response:
 ```json
 {
     "api_key": "9ccc9365c72818f858d3cb243d8414aa",
-    "api_key_expires_at": "2014-03-21T04:43:57.398Z"
+    "api_key_expires_at": "2014-03-21T04:43:57.398Z",
     "email": "name@example.com"
 }
 ```
 
-### PUT `/api/users/reset_api_key`
+### PATCH/PUT `/api/users/reset_api_key`
 
 You can reset you API key. This invalidates the old one, and generates a new one.
 
+Request data:
 
 ```json
 {
@@ -84,14 +85,16 @@ Response:
 ```json
 {
     "api_key": "8f15b8b676839c4d293071ae449fa496",
-    "api_key_expires_at": "2014-03-21T05:58:12.234Z"
+    "api_key_expires_at": "2014-03-21T05:58:12.234Z",
     "email": "name@example.com"
 }
 ```
 
-### PUT `/api/users/change_password`
+### PATCH/PUT `/api/users/change_password`
 
 You can change your password.
+
+Request data:
 
 ```json
 {
@@ -106,7 +109,136 @@ Response:
 ```json
 {
     "api_key": "8f15b8b676839c4d293071ae449fa496",
-    "api_key_expires_at": "2014-03-21T05:58:12.234Z"
+    "api_key_expires_at": "2014-03-21T05:58:12.234Z",
     "email": "name@example.com"
 }
 ```
+
+
+### GET `/api/todos`
+
+Get all todos for the current user.
+
+Request data:
+
+```json
+{
+    "api_key": "8f15b8b676839c4d293071ae449fa496"
+}
+```
+
+Response:
+
+```json
+[
+    {
+        "id": 20,
+        "text": "Pick up the milk.",
+        "due_date": "2014-03-03",
+        "priority": 3,
+        "completed": false,
+        "created_at": "2014-02-24T03:14:44.545Z",
+        "updated_at": "2014-02-24T03:14:44.545Z",
+    }
+]
+```
+
+
+### GET `/api/todos/:id`
+
+Get todo with given id.
+
+Request data:
+
+```json
+{
+    "api_key": "8f15b8b676839c4d293071ae449fa496"
+}
+```
+
+Response:
+
+```json
+{
+    "id": 20,
+    "text": "Pick up the milk.",
+    "due_date": "2014-03-03",
+    "priority": 3,
+    "completed": false,
+    "created_at": "2014-02-24T03:14:44.545Z",
+    "updated_at": "2014-02-24T03:14:44.545Z",
+}
+```
+
+
+### POST `/api/todos`
+
+Create a new todo.
+
+Request data:
+
+```json
+{
+    "api_key": "8f15b8b676839c4d293071ae449fa496"
+}
+```
+
+Response:
+
+```json
+{
+    "id": 23,
+    "completed": false,
+    "text": "Finish the app.",
+    "due_date": null,
+    "priority": 3,
+    "created_at": "2014-02-24T03:49:23.410Z",
+    "updated_at": "2014-02-24T03:49:23.410Z"
+}
+```
+
+
+### PATCH/PUT `/api/todos/:id`
+
+Edit todo with given id.
+
+Note: Only specified fields are updated.
+If you want to remove the due date, for example, you must send it as `null`.
+
+Request data:
+
+```json
+{
+    "api_key": "8f15b8b676839c4d293071ae449fa496",
+    "due_date": "2014-02-28T03:00:00.000Z",
+    "completed": true
+}
+```
+
+Response:
+
+```json
+{
+  "id": 23,
+  "completed": true,
+  "text": "Finish the app.",
+  "due_date": "2014-02-28",
+  "priority": 3,
+  "created_at": "2014-02-24T03:49:23.410Z",
+  "updated_at": "2014-02-24T03:49:23.410Z"
+}
+```
+
+### DELETE `/api/todos/:id`
+
+Delete todo with given id.
+
+Request data:
+
+```json
+{
+    "api_key": "8f15b8b676839c4d293071ae449fa496"
+}
+```
+
+Response: _empty_.

@@ -2,7 +2,7 @@ module Api
   class UsersController < ApiController
     skip_before_filter :restrict_access
 
-    # POST /users/signup
+    # POST /api/users/signup
     def signup
       user = User.new(user_params)
       if user.save
@@ -12,7 +12,7 @@ module Api
       end
     end
 
-    # POST /users/login
+    # POST /api/users/login
     def login
       user = User.find_by_email(params[:email])
       if user && user.authenticate(params[:password])
@@ -22,7 +22,7 @@ module Api
       end
     end
 
-    # PATCH/PUT /users/reset_api_key
+    # PATCH/PUT /api/users/reset_api_key
     def reset_api_key
       user = User.find_by_email(params[:email])
       if user && user.authenticate(params[:password])
@@ -33,7 +33,7 @@ module Api
       end
     end
 
-    # PATCH/PUT /users/change_password
+    # PATCH/PUT /api/users/change_password
     def change_password
       user = User.find_by_email(params[:email])
       if user && user.authenticate(params[:old_password])
