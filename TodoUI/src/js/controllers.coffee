@@ -49,6 +49,7 @@ angular.module("todoApp")
 	$scope.newTodo = ->
 		todo = new Todo()
 		todo.text = $scope.newTodoText
+		$scope.newTodoText = ''
 		todo.$save ->
 			$scope.fetchTodos()
 
