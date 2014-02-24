@@ -6,7 +6,7 @@
         <input type="text" ng-model="newTodoText" class="form-control input-lg" placeholder="What do you need to do?"/>
     </form>
 
-    <div class="pull-right todo-sort" bs-sort attributes="sortAttrs"></div>
+    <div class="pull-right todo-sort" bs-sort attributes="sortAttrs" ng-if="todos.length > 0"></div>
 
     <div ng-repeat="todo in todos" class="row">
         <div class="col-md-12 todo-item">
