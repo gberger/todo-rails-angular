@@ -7,15 +7,17 @@ class ActiveModel::Errors
 end
 
 class ActiveRecord::Base
-  def permit(*filters)
+  def pick(*filters)
     params = {}
 
     filters.flatten.each do |filter|
       case filter
-        when String then
+        when String, Fixnum then
           params[filter] = self[filter]
         when Symbol then
           params[filter] = self.send(filter)
+        when Hash then
+          params.merge filter
       end
     end
 

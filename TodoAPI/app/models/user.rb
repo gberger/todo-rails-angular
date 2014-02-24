@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :todos
 
   def as_json(options)
-    permit(:email, :api_key, :api_key_expires_at)
+    pick(:email, :api_key, :api_key_expires_at)
   end
 
   def api_key_expired?
