@@ -21,6 +21,9 @@ You cannot use an expired API key. Once it's expired, a new one will be generate
 
 In order to use an API key, you must include the token either in the **"api_key"** attribute in the request data, or in the **ApiKey** HTTP header.
 
+**Note**: [Postman](https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en) is a Chrome app that helps you test and explore APIs.
+I have prepared a Postman collection for this project, which can be found [here](https://www.getpostman.com/collections/1d15888cde997f797b98).
+
 ### POST `/api/users/signup`
 
 Creates a new user. The email must be unique. Remember your password, you'll need it later to login.
