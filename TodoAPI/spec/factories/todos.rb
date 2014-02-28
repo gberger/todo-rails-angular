@@ -2,9 +2,7 @@
 
 FactoryGirl.define do
   factory :todo do
-    text "MyText"
-    due_date "2014-02-17"
-    priority 1
-    completed false
+    user
+    text "Pick up the milk."
   end
 end
