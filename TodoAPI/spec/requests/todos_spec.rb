@@ -5,35 +5,35 @@ describe "Todos" do
     describe "GET /api/todos" do
       it "denies access" do
         get api_todos_path
-        response.status.should be(401)
+        expect(response.status).to eq(401)
       end
     end
 
     describe "POST /api/todos" do
       it "denies access" do
         post api_todos_path
-        response.status.should be(401)
+        expect(response.status).to eq(401)
       end
     end
 
     describe "GET /api/todos/:id" do
       it "denies access" do
         get api_todo_path(1)
-        response.status.should be(401)
+        expect(response.status).to eq(401)
       end
     end
 
     describe "PATCH/PUT /api/todos/:id" do
       it "denies access" do
         patch api_todo_path(1)
-        response.status.should be(401)
+        expect(response.status).to eq(401)
       end
     end
 
     describe "DELETE /api/todos/:id" do
       it "denies access" do
         delete api_todo_path(1)
-        response.status.should be(401)
+        expect(response.status).to eq(401)
       end
     end
   end
@@ -48,35 +48,35 @@ describe "Todos" do
     describe "GET /api/todos" do
       it "allows access" do
         get api_todos_path, nil, @headers
-        response.status.should be(200)
+        expect(response.status).to eq(200)
       end
     end
 
     describe "POST /api/todos" do
       it "allows access" do
         post api_todos_path, attributes_for(:todo), @headers
-        response.status.should be(201)
+        expect(response.status).to eq(201)
       end
     end
 
     describe "GET /api/todos/:id" do
       it "allows access" do
         get api_todo_path(@todo.id), nil, @headers
-        response.status.should be(200)
+        expect(response.status).to eq(200)
       end
     end
 
     describe "PATCH/PUT /api/todos/:id" do
       it "allows access" do
         patch api_todo_path(@todo.id), nil, @headers
-        response.status.should be(200)
+        expect(response.status).to eq(200)
       end
     end
 
     describe "DELETE /api/todos/:id" do
       it "allows access" do
         delete api_todo_path(@todo.id), nil, @headers
-        response.status.should be(204)
+        expect(response.status).to eq(204)
       end
     end
   end
@@ -92,21 +92,21 @@ describe "Todos" do
     describe "GET /api/todos/:id" do
       it "deny access" do
         get api_todo_path(@todo.id), nil, @headers
-        response.status.should be(401)
+        expect(response.status).to eq(401)
       end
     end
 
     describe "PATCH/PUT /api/todos/:id" do
       it "deny access" do
         patch api_todo_path(@todo.id), nil, @headers
-        response.status.should be(401)
+        expect(response.status).to eq(401)
       end
     end
 
     describe "DELETE /api/todos/:id" do
       it "deny access" do
         delete api_todo_path(@todo.id), nil, @headers
-        response.status.should be(401)
+        expect(response.status).to eq(401)
       end
     end
   end
