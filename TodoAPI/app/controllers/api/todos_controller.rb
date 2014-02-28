@@ -1,23 +1,20 @@
 module Api
   class TodosController < ApiController
-    # GET /api/todo
-    # GET /api/todo.json
+    # GET /api/todos
     def index
       @todos = Todo.owned_by(current_user).order(order_param)
 
       render json: @todos
     end
 
-    # GET /api/todo/1
-    # GET /api/todo/1.json
+    # GET /api/todos/1
     def show
       @todo = Todo.find(params[:id])
 
       render json: @todo
     end
 
-    # POST /api/todo
-    # POST /api/todo.json
+    # POST /api/todos
     def create
       puts params.inspect
       @todo = Todo.new(todo_params)
@@ -30,8 +27,7 @@ module Api
       end
     end
 
-    # PATCH/PUT /api/todo/1
-    # PATCH/PUT /api/todo/1.json
+    # PATCH/PUT /api/todos/1
     def update
       @todo = Todo.owned_by(current_user).find(params[:id])
 
@@ -42,8 +38,7 @@ module Api
       end
     end
 
-    # DELETE /api/todo/1
-    # DELETE /api/todo/1.json
+    # DELETE /api/todos/1
     def destroy
       @todo = Todo.owned_by(current_user).find(params[:id])
       @todo.destroy
