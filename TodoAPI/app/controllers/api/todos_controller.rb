@@ -16,7 +16,6 @@ module Api
 
     # POST /api/todos
     def create
-      puts params.inspect
       @todo = Todo.new(todo_params)
       @todo.user = current_user
 

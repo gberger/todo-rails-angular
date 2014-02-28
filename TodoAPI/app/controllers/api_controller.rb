@@ -4,7 +4,6 @@ class ApiController < ApplicationController
   end
 
   def current_user
-    puts provided_api_key
     @current_user ||= User.find_by_api_key(provided_api_key)
   end
 
