@@ -1,6 +1,11 @@
 module Api
   class UsersController < ApiController
-    skip_before_filter :restrict_access
+    skip_before_filter :restrict_access, except: [:me]
+
+    # GET /api/users/me
+    def me
+      render json: current_user
+    end
 
     # POST /api/users/signup
     def signup

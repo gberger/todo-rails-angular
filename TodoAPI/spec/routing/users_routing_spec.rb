@@ -11,6 +11,10 @@ describe Api::UsersController do
       expect(post("/api/users/login")).to route_to("api/users#login")
     end
 
+    it "routes to #me" do
+      expect(get("/api/users/me")).to route_to("api/users#me")
+    end
+
     it "routes to #reset_api_key (PUT)" do
       expect(put("/api/users/reset_api_key")).to route_to("api/users#reset_api_key")
     end

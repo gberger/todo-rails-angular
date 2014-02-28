@@ -4,6 +4,7 @@ TodoAPI::Application.routes.draw do
 
     post 'users/signup'
     post 'users/login'
+    get 'users/me'
 
     put 'users/reset_api_key'
     patch 'users/reset_api_key'

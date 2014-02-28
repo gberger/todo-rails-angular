@@ -70,6 +70,20 @@ Response:
 }
 ```
 
+### GET `/api/users/me`
+
+Get info about the user by providing their API key.
+
+Response:
+
+```json
+{
+    "api_key": "9ccc9365c72818f858d3cb243d8414aa",
+    "api_key_expires_at": "2014-03-21T04:43:57.398Z",
+    "email": "name@example.com"
+}
+```
+
 ### PATCH/PUT `/api/users/reset_api_key`
 
 You can reset you API key. This invalidates the old one, and generates a new one.
