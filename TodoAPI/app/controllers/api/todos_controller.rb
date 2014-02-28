@@ -11,7 +11,11 @@ module Api
     def show
       @todo = Todo.find(params[:id])
 
-      render json: @todo
+      if @todo.user == current_user
+        render json: @todo
+      else
+        head :unauthorized
+      end
     end
 
     # POST /api/todos
@@ -28,21 +32,29 @@ module Api
 
     # PATCH/PUT /api/todos/1
     def update
-      @todo = Todo.owned_by(current_user).find(params[:id])
+      @todo = Todo.find(params[:id])
 
-      if @todo.update(todo_params)
-        render json: @todo
+      if @todo.user == current_user
+        if @todo.update(todo_params)
+          render json: @todo
+        else
+          render json: {messages: @todo.errors.angular_growl_messages}, status: :bad_request
+        end
       else
-        render json: {messages: @todo.errors.angular_growl_messages}, status: :bad_request
+        head :unauthorized
       end
     end
 
     # DELETE /api/todos/1
     def destroy
-      @todo = Todo.owned_by(current_user).find(params[:id])
-      @todo.destroy
+      @todo = Todo.find(params[:id])
 
-      head :no_content
+      if @todo.user == current_user
+        @todo.destroy
+        head :no_content
+      else
+        head :unauthorized
+      end
     end
 
     private
