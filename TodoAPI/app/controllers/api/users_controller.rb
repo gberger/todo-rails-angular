@@ -31,7 +31,7 @@ module Api
     def reset_api_key
       user = User.find_by_email(params[:email])
       if user && user.authenticate(params[:password])
-        user.reset_api_key
+        user.reset_api_key!
         render json: user.as_json(nil).merge(messages: [{text: 'API key reset successfully.', severity: 'info'}]), status: :ok
       else
         render json: {messages: [{text: "Incorrect email or password", severity: "error"}]}, status: 400
