@@ -15,8 +15,12 @@ describe Api::TodosController do
       post("/api/todos").should route_to("api/todos#create")
     end
 
-    it "routes to #update" do
+    it "routes to #update (PUT)" do
       put("/api/todos/1").should route_to("api/todos#update", :id => "1")
+    end
+
+    it "routes to #update (PATCH)" do
+      patch("/api/todos/1").should route_to("api/todos#update", :id => "1")
     end
 
     it "routes to #destroy" do
