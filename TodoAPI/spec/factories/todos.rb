@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :todo do
     user
-    text "Pick up the milk."
+    text { user.nil? ? "Pick up the milk." : "Pick up #{user.email}'s milk."  }
   end
 end
