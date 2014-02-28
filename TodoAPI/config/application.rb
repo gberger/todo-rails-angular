@@ -20,6 +20,12 @@ module TodoAPI
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # This is used for sessions, so it's never used. It's here to stop deprecation warnings.
+    config.secret_key_base = "blahblahblah"
+
+    # Another deprecation warning stopper that's not used.
+    config.i18n.enforce_available_locales = false
+
     config.generators do |g|
       g.test_framework :rspec, :fixture => true, :views => false
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
