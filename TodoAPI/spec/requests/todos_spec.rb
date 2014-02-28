@@ -84,7 +84,7 @@ describe "Todos" do
   context "with incorrect API key" do
     before(:each) do
       @user1 = create(:user)
-      @user2 = create(:user, email: 'another@example.com')
+      @user2 = create(:user)
       @todo = create(:todo, user: @user1)
       @headers = {'ApiKey' => @user2.api_key}
     end
