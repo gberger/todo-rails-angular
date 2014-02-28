@@ -32,4 +32,7 @@ RSpec.configure do |config|
   # factory_girl
   config.include FactoryGirl::Syntax::Methods
 
+  # Helpers
+  config.include Requests::JsonHelpers, type: :request
+
 end
