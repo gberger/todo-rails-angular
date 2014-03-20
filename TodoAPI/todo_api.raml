@@ -1,0 +1,209 @@
+#%RAML 0.8
+title: Todo API
+baseUri: /api
+
+schemas:
+  - todo: |
+      {
+        "$schema": "http://json-schema.org/schema#",
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "minimum": 1 },
+          "text": { "type": "string" },
+          "due_date": { "anyOf": [
+            { "type": "string", "format": "date-time" },
+            { "type": "null" }
+          ]},
+          "priority": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "completed": { "type": "boolean" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      }
+  - user_with_api_key: |
+      {
+        "$schema": "http://json-schema.org/schema#",
+        "type": "object",
+        "properties": {
+          "api_key": { "type": "string" },
+          "api_key_expires_at": { "type": "string", "format": "date-time" },
+          "email": { "type": "email" }
+        }
+      }
+  - credentials: |
+      {
+        "$schema": "http://json-schema.org/schema#",
+        "type": "object",
+        "properties": {
+          "email": { "type": "string", "format": "email" },
+          "password": { "type": "string", "minLength": 8 }
+        }
+      }
+  - change_password_credentials: |
+      {
+        "$schema": "http://json-schema.org/schema#",
+        "type": "object",
+        "properties": {
+          "email": { "type": "email" },
+          "old_password": { "type": "string" },
+          "new_password": { "type": "string", "minLength": 8 }
+        }
+      }
+  - errors: |
+      {
+        "$schema": "http://json-schema.org/schema#",
+        "type": "object",
+        "properties": {
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" },
+                "severity": { "type": "string", "enum": ["error", "warning", "info", "success"] }
+              }
+            }
+          }
+        }
+      }
+      
+traits:
+  - secure:
+      headers:
+        ApiKey: 
+          description: the API Key that was provided to you
+          required: true
+          example: "9ccc9365c72818f858d3cb243d8414aa" 
+      
+/todos:
+  is: [ secure ]
+  get:
+    description: Get all todos for the current user.
+    responses:
+      200:
+        description: OK.
+        body: 
+          application/json:
+            schema: todo
+      401:
+        description: You must include the token either in the **"api_key"** attribute in the request data, or in the **ApiKey** HTTP header. If you included it, check if it's valid.
+  post:
+    description: Create a new todo.
+    body:
+      application/json:
+        schema: todo
+    responses:
+      200:
+        description: OK. Todo was created.
+        body: 
+          application/json:
+            schema: todo
+      400:
+        description: Bad request. Validation problem. Check the body for more details.
+        body:
+          application/json:
+            schema: errors
+      401:
+        description: You must include the token either in the **"api_key"** attribute in the request data, or in the **ApiKey** HTTP header. If you included it, check if it's valid.
+  /{todoId}:
+    get:
+      description: Get todo with given id.
+      responses:
+        200:
+          description: OK.
+          body: 
+            application/json:
+              schema: todo
+        401:
+          description: You must include the token either in the **"api_key"** attribute in the request data, or in the **ApiKey** HTTP header. If you included it, check if it's valid and that you are allowed to access this resource.
+    patch:
+      description: Edit todo with given id. Only specified fields are updated. If you want to remove the due date, for example, you must send it as null.
+      body:
+        application/json:
+          schema: todo
+      responses:
+        200:
+          description: OK. Todo was patched.
+          body: 
+            application/json:
+              schema: todo
+        400:
+          description: Bad request. Validation problem. Check the body for more details.
+          body:
+            application/json:
+              schema: errors
+        401:
+          description: You must include the token either in the **"api_key"** attribute in the request data, or in the **ApiKey** HTTP header. If you included it, check if it's valid and that you are allowed to access this resource.
+    delete:
+      description: Delete todo with given id.
+      responses:
+        204:
+          description: OK. Todo was deleted.
+        401:
+          description: You must include the token either in the **"api_key"** attribute in the request data, or in the **ApiKey** HTTP header. If you included it, check if it's valid and that you are allowed to access this resource.
+/users:
+  /signup:
+    post:
+      description: Create a new user.
+      body:
+        application/json:
+          schema: credentials
+      responses:
+        200:
+          description: OK. User was created.
+          body:
+            application/json:
+              schema: user_with_api_key
+        400:
+          description: Bad request. Validation problem with the email or the password. Check the body for more details.
+          body:
+            application/json:
+              schema: errors
+  /login:
+    post:
+      description: Login as a given user, given their email and password. Login simply means to obtain a user's API Key.
+      body:
+        application/json:
+          schema: credentials
+      responses:
+        200:
+          description: OK.
+          body:
+            application/json:
+              schema: user_with_api_key
+        401:
+          description: The given credentials are not valid.
+  /me:
+    is: [ secure ]
+    get:
+      description: Get info about the current user, given their API Key.
+      responses:
+        200:
+          description: OK.
+          body:
+            application/json:
+              schema: user_with_api_key
+        401:
+          description: You must include the token either in the **"api_key"** attribute in the request data, or in the **ApiKey** HTTP header. If you included it, check if it's valid.
+  /reset_api_key:
+    post:
+      description: Reset the user's API Key, given their email and password.
+  /change_password:
+    post:
+      description: Change the user's password, given their email and old password.
+      body:
+        application/json:
+          schema: change_password_credentials
+      responses:
+        200:
+          description: OK.
+          body:
+            application/json:
+              schema: user_with_api_key
+        400:
+          description: Bad request. Validation problem with the new password. Check the body for more details.
+          body:
+            application/json:
+              schema: errors
+        401:
+          description: The given credentials are not valid.
